@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private Button buttonconv;
     private EditText num1;
-    private TextView num2;
+    private EditText num2;
     private int t = 0;
 
     @Override
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonconv = findViewById(R.id.buttonConverter);
         num1 = (EditText) findViewById(R.id.editNum1);
-        num2 = findViewById(R.id.textView2);
+        num2 = (EditText) findViewById(R.id.editText2);
 
 
         buttonconv.setOnClickListener(new View.OnClickListener() {
