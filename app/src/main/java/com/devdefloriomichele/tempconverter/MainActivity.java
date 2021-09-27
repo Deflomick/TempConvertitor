@@ -1,5 +1,6 @@
 package com.devdefloriomichele.tempconverter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -12,7 +13,9 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonconv;
     private EditText num1;
     private EditText num2;
-    private int t = 0;
+    private int t = 0,Intresult=0;
+    private static final String SAVE_VALUE = MainActivity.class.getSimpleName()+"save_index";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +25,18 @@ public class MainActivity extends AppCompatActivity {
         buttonconv = findViewById(R.id.buttonConverter);
         num1 = (EditText) findViewById(R.id.editNum1);
         num2 = (EditText) findViewById(R.id.editText2);
+        if (savedInstanceState != null) {
+            Intresult= savedInstanceState.getInt(SAVE_VALUE);
+        }
+
+
 
 
         buttonconv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
 
                 double result = 0;
@@ -36,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
                     result = celsiusToFarenheit(num1);
                     t++;
-                    int Intresult=(int)Math.round(result);
+                    Intresult=(int)Math.round(result);
 
                     num2.setText(String.valueOf(Intresult));
 
@@ -44,10 +54,13 @@ public class MainActivity extends AppCompatActivity {
                     result = farenheitToCelsius(num2);
                     t--;
                     result =(int)Math.round(result);
-                    int Intresult=(int)Math.round(result);
+                    Intresult=(int)Math.round(result);
 
                     num1.setText(String.valueOf(Intresult));
+
+
                 }
+
             }
 
 
@@ -77,5 +90,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SAVE_VALUE,Intresult);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Intresult=savedInstanceState.getInt(SAVE_VALUE);
+        num2.setText(String.valueOf(Intresult));
+
+    }
+
+
 }
