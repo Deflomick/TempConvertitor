@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+
 
 
 import com.devdefloriomichele.tempconverter.databinding.ActivityMainBinding;
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
         viewModel= new ViewModelProvider(this).get(MainViewModel.class);
+        binding.setViewModel(viewModel);
 
 
 
