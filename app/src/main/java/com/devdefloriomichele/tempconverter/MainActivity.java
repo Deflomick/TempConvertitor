@@ -1,22 +1,18 @@
 package com.devdefloriomichele.tempconverter;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
 
 import com.devdefloriomichele.tempconverter.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    /*private Button buttonconv;
-    private EditText num1;
-    private EditText num2;*/
+
     private MainViewModel viewModel;
     private ActivityMainBinding binding;
 
@@ -30,9 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
         viewModel= new ViewModelProvider(this).get(MainViewModel.class);
-        /*buttonconv = findViewById(R.id.buttonConverter);
-        num1 = (EditText) findViewById(R.id.editNum1);
-        num2 = (EditText) findViewById(R.id.editText2);*/
+
 
 
         viewModel.getCurrentWord().observe(this, currentWord -> {
@@ -52,33 +46,23 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        binding.buttonConverter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.buttonConverter.setOnClickListener(view -> {
 
 
 
-                if (viewModel.t == 0) {
+            if (viewModel.t == 0) {
 
-                    viewModel.celsiusToFarenheit(binding.editNum1);
-                    viewModel.t++;
-
-
-                } else if (viewModel.t == 1) {
-                    viewModel.farenheitToCelsius(binding.editNum2);
-                    viewModel.t--;
+                viewModel.celsiusToFarenheit(binding.editNum1);
+                viewModel.t++;
 
 
+            } else if (viewModel.t == 1) {
+                viewModel.farenheitToCelsius(binding.editNum2);
+                viewModel.t--;
 
-                }
+
 
             }
-
-
-
-
-
-
 
         });
 
