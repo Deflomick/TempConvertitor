@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,8 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel.getCurrentWord().observe(this, currentWord -> {
             if (viewModel.t == 0) {
-            num2.setText(currentWord);}else if(viewModel.t == 1) {
+            num2.setText(currentWord);
+            num2.setBackgroundColor(Color.GREEN);
+                num1.setBackgroundColor(Color.CYAN);
+
+            }
+            else if(viewModel.t == 1) {
                 num1.setText(currentWord);
+                num1.setBackgroundColor(Color.GREEN);
+                num2.setBackgroundColor(Color.CYAN);
+
             }
 
 
