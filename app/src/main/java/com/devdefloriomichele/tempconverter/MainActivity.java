@@ -28,8 +28,14 @@ public class MainActivity extends AppCompatActivity {
         num2 = (EditText) findViewById(R.id.editText2);
 
 
+        viewModel.getCurrentWord().observe(this, currentWord -> {
+            if (viewModel.t == 0) {
+            num2.setText(currentWord);}else if(viewModel.t == 1) {
+                num1.setText(currentWord);
+            }
 
 
+        });
 
         buttonconv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,25 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
                 if (viewModel.t == 0) {
 
-                    viewModel.result = viewModel.celsiusToFarenheit(num1);
+                    viewModel.celsiusToFarenheit(num1);
                     viewModel.t++;
-                    viewModel.Intresult=(int)Math.round(viewModel.result);
 
-                    num2.setText(String.valueOf(viewModel.Intresult));
 
                 } else if (viewModel.t == 1) {
-                    viewModel.result = viewModel.farenheitToCelsius(num2);
+                    viewModel.farenheitToCelsius(num2);
                     viewModel.t--;
-                    viewModel.result =(int)Math.round(viewModel.result);
-                    viewModel.Intresult=(int)Math.round(viewModel.result);
 
-                    num1.setText(String.valueOf(viewModel.Intresult));
 
 
                 }

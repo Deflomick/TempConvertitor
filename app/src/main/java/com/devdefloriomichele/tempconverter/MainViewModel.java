@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
     public int t = 0, Intresult = 0;
-    double result = 0;
+
 
 
     private final MutableLiveData<String> _currentWord = new MutableLiveData<>();
@@ -22,29 +22,23 @@ public class MainViewModel extends ViewModel {
 
     }*/
 
-    public Double farenheitToCelsius(EditText s1) {
+    public void farenheitToCelsius(EditText s1) {
 
         double mynum = 0;
         mynum = Double.parseDouble((s1.getText().toString()));
         mynum = (mynum - 32) * 0.556;
-        return mynum;
-
-
-        //_currentWord.setValue(String.valueOf(mynum));
-
-
+        Intresult=(int)Math.round(mynum);
+        _currentWord.setValue(String.valueOf(Intresult));
 
     }
 
-    public Double celsiusToFarenheit(EditText s2) {
+    public void celsiusToFarenheit(EditText s2) {
 
         double mynum = 0;
         mynum = Double.parseDouble((s2.getText().toString()));
         mynum = (mynum * 1.8) + 32;
-        return mynum;
-
-        //_currentWord.setValue(String.valueOf(mynum));
-
+        Intresult=(int)Math.round(mynum);
+        _currentWord.setValue(String.valueOf(Intresult));
 
 
     }
