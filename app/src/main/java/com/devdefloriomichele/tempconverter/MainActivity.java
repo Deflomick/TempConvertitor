@@ -40,18 +40,18 @@ public class MainActivity extends AppCompatActivity {
 
                     num2.setText(String.valueOf(Intresult));
 
-                } /*else if (t == 1) {
+                } else if (t == 1) {
                     result = farenheitToCelsius(num2);
                     t--;
                     result =(int)Math.round(result);
                     int Intresult=(int)Math.round(result);
 
                     num1.setText(String.valueOf(Intresult));
-                }*/
+                }
             }
 
 
-            private double farenheitToCelsius(TextView s1) {
+            private double farenheitToCelsius(EditText s1) {
 
                 double mynum = 0;
                 mynum = Double.parseDouble((s1.getText().toString()));
