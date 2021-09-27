@@ -2,6 +2,7 @@ package com.devdefloriomichele.tempconverter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonconv;
     private EditText num1;
     private EditText num2;
-    private int t = 0,Intresult=0;
+    private MainViewModel viewModel;
     private static final String SAVE_VALUE = MainActivity.class.getSimpleName()+"save_index";
 
 
@@ -21,13 +22,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        viewModel= new ViewModelProvider(this).get(MainViewModel.class);
         buttonconv = findViewById(R.id.buttonConverter);
         num1 = (EditText) findViewById(R.id.editNum1);
         num2 = (EditText) findViewById(R.id.editText2);
-        if (savedInstanceState != null) {
-            Intresult= savedInstanceState.getInt(SAVE_VALUE);
-        }
+
 
 
 
@@ -42,21 +41,21 @@ public class MainActivity extends AppCompatActivity {
                 double result = 0;
                 String S;
 
-                if (t == 0) {
+                if (viewModel.t == 0) {
 
                     result = celsiusToFarenheit(num1);
-                    t++;
-                    Intresult=(int)Math.round(result);
+                    viewModel.t++;
+                    viewModel.Intresult=(int)Math.round(result);
 
-                    num2.setText(String.valueOf(Intresult));
+                    num2.setText(String.valueOf(viewModel.Intresult));
 
-                } else if (t == 1) {
+                } else if (viewModel.t == 1) {
                     result = farenheitToCelsius(num2);
-                    t--;
+                    viewModel.t--;
                     result =(int)Math.round(result);
-                    Intresult=(int)Math.round(result);
+                    viewModel.Intresult=(int)Math.round(result);
 
-                    num1.setText(String.valueOf(Intresult));
+                    num1.setText(String.valueOf(viewModel.Intresult));
 
 
                 }
@@ -94,20 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(SAVE_VALUE,Intresult);
-
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Intresult=savedInstanceState.getInt(SAVE_VALUE);
-        num2.setText(String.valueOf(Intresult));
-
-    }
 
 
 }
