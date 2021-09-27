@@ -11,42 +11,48 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-    private Button buttonconv;
-    private EditText num1;
-    private EditText num2;
-    private MainViewModel viewModel;
+import com.devdefloriomichele.tempconverter.databinding.ActivityMainBinding;
 
+public class MainActivity extends AppCompatActivity {
+    /*private Button buttonconv;
+    private EditText num1;
+    private EditText num2;*/
+    private MainViewModel viewModel;
+    private ActivityMainBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        binding.setLifecycleOwner(this);
+
+        setContentView(binding.getRoot());
         viewModel= new ViewModelProvider(this).get(MainViewModel.class);
-        buttonconv = findViewById(R.id.buttonConverter);
+        /*buttonconv = findViewById(R.id.buttonConverter);
         num1 = (EditText) findViewById(R.id.editNum1);
-        num2 = (EditText) findViewById(R.id.editText2);
+        num2 = (EditText) findViewById(R.id.editText2);*/
 
 
         viewModel.getCurrentWord().observe(this, currentWord -> {
             if (viewModel.t == 0) {
-            num2.setText(currentWord);
-            num2.setBackgroundColor(Color.GREEN);
-                num1.setBackgroundColor(Color.CYAN);
+            binding.editNum2.setText(currentWord);
+                binding.editNum2.setBackgroundColor(Color.GREEN);
+                binding.editNum1.setBackgroundColor(Color.CYAN);
 
             }
             else if(viewModel.t == 1) {
-                num1.setText(currentWord);
-                num1.setBackgroundColor(Color.GREEN);
-                num2.setBackgroundColor(Color.CYAN);
+                binding.editNum1.setText(currentWord);
+                binding.editNum1.setBackgroundColor(Color.GREEN);
+                binding.editNum1.setBackgroundColor(Color.CYAN);
 
             }
 
 
         });
 
-        buttonconv.setOnClickListener(new View.OnClickListener() {
+        binding.buttonConverter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -54,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if (viewModel.t == 0) {
 
-                    viewModel.celsiusToFarenheit(num1);
+                    viewModel.celsiusToFarenheit(binding.editNum1);
                     viewModel.t++;
 
 
                 } else if (viewModel.t == 1) {
-                    viewModel.farenheitToCelsius(num2);
+                    viewModel.farenheitToCelsius(binding.editNum2);
                     viewModel.t--;
 
 
