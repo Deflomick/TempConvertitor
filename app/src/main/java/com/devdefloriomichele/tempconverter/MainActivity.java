@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText num1;
     private EditText num2;
     private MainViewModel viewModel;
-    private static final String SAVE_VALUE = MainActivity.class.getSimpleName()+"save_index";
+
 
 
     @Override
@@ -38,22 +38,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                double result = 0;
-                String S;
+
+
 
                 if (viewModel.t == 0) {
 
-                    result = celsiusToFarenheit(num1);
+                    viewModel.result = viewModel.celsiusToFarenheit(num1);
                     viewModel.t++;
-                    viewModel.Intresult=(int)Math.round(result);
+                    viewModel.Intresult=(int)Math.round(viewModel.result);
 
                     num2.setText(String.valueOf(viewModel.Intresult));
 
                 } else if (viewModel.t == 1) {
-                    result = farenheitToCelsius(num2);
+                    viewModel.result = viewModel.farenheitToCelsius(num2);
                     viewModel.t--;
-                    result =(int)Math.round(result);
-                    viewModel.Intresult=(int)Math.round(result);
+                    viewModel.result =(int)Math.round(viewModel.result);
+                    viewModel.Intresult=(int)Math.round(viewModel.result);
 
                     num1.setText(String.valueOf(viewModel.Intresult));
 
@@ -63,29 +63,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            private double farenheitToCelsius(EditText s1) {
-
-                double mynum = 0;
-                mynum = Double.parseDouble((s1.getText().toString()));
-                mynum = (mynum - 32) * 0.556;
 
 
-                return mynum;
 
-
-            }
-
-            private double celsiusToFarenheit(EditText s2) {
-
-                double mynum = 0;
-                mynum = Double.parseDouble((s2.getText().toString()));
-                mynum = (mynum * 1.8) + 32;
-
-
-                return mynum;
-
-
-            }
 
 
         });
